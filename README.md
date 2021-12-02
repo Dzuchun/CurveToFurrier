@@ -1,4 +1,4 @@
-A simple tool to express any curve you want as a Furrier series using rotating circles.
+A simple tool to express any curve you want as a complex Furrier series using rotating circles.
 How to use:
 1) Launch a program
 2) Hold ctrl + click on a canvas - recording started.
