@@ -10,13 +10,13 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import java.util.Comparator;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 
 public class MainWindow extends JFrame {
+	
 	private static final long serialVersionUID = 1L;
 	private static Dimension size = new Dimension(1920, 1080);
 	private static Dimension center = new Dimension(size.width/2, size.height/2);
@@ -26,7 +26,7 @@ public class MainWindow extends JFrame {
 	private static long cycleLength;
 	private static long pointsTimeInterval = 1;
 	private static long repaintTimeInterval = 16;
-	private static int maxCircleFrequency = 100;
+	private static int maxCircleFrequency = 40;
 	
 	public DrawData data;
 	
@@ -90,7 +90,7 @@ public class MainWindow extends JFrame {
 				synchronized(LOCK) {
 //					System.out.println("Repainting!");
 					if (programState != State.LISTENING && programState != State.IDLE) {
-						data.forward((System.currentTimeMillis() - lastTime)/1.0);
+						data.forward(System.currentTimeMillis() - lastTime);
 						lastTime = System.currentTimeMillis();
 					}
 					
@@ -100,12 +100,12 @@ public class MainWindow extends JFrame {
 	
 						graphics.translate(center.width, center.height);
 						graphics.setColor(circlesColor);
-						double i=0;
+//						double i=0;
 						for (MainWindow.DrawData.DrawingCircle circle : data.circles) {
 							graphics.drawOval((int)-circle.radius, (int)-circle.radius, (int)(2 * circle.radius), (int)(2 * circle.radius));
 							graphics.drawLine(0, 0, circle.pointer.getReal(), circle.pointer.getImaginary());
 							graphics.translate(circle.pointer.getReal(), circle.pointer.getImaginary());
-							i++;
+//							i++;
 //							data.curves.setRGB((int)graphics.getTransform().getTranslateX(), (int)graphics.getTransform().getTranslateY(), getRainbowColor(i/data.circles.size()).getRGB());
 						}
 						
@@ -230,7 +230,7 @@ public class MainWindow extends JFrame {
 				tmp = circle.pointerSave.clone();
 				tmp.multiply(ComplexNumber.rotation(rotationAngle * circle.frequency));
 				circle.pointer = tmp;
-//				circle.pointer.trimAbsolute(circle.radius);
+				circle.pointer.trimAbsolute(circle.radius);
 //				System.out.println("Multiplying " + circle.pointerSave + " and " + ComplexNumber.rotation(rotationAngle) + " gives us - " + circle.pointer);
 //				System.out.println("Multiplying " + circle.pointerSave.getAbsolute() + " and " + ComplexNumber.rotation(rotationAngle).getAbsolute() + " gives us - " + circle.pointer.getAbsolute());
 			}
@@ -243,7 +243,7 @@ public class MainWindow extends JFrame {
 				this.circles = new Vector<DrawingCircle>(0);
 				this.curves = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_BGR);
 				this.inputCurve = new Vector<ComplexNumber>(0);
-				this.timeSpent = 0l;
+				this.timeSpent = 0;
 			}
 		}
 		
@@ -266,7 +266,7 @@ public class MainWindow extends JFrame {
 					}
 					sum.divide(pointsCount);
 					circles.add(new DrawingCircle(sum, f));
-//					System.out.println("Creating circle with argument " + sum.toString());
+					System.out.println("Creating circle with argument " + sum.toString());
 				}
 				System.out.println("Calculated circles");
 				//TODO syncronize
