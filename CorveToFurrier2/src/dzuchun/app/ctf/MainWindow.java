@@ -214,7 +214,12 @@ public class MainWindow extends JFrame {
 		fillFreq();
 		synchronized (LOCK) {
 			circles = FurrierTransforms.setDescrete(freq, curve);
-			List<Integer> order = new ArrayList<>(List.of(Util.intArray(freq.length)));
+			//Filling order
+			Integer[] tmp = Util.intArray(freq.length);
+			Vector<Integer> order = new Vector<Integer>(0);
+			for (int i : tmp) {
+				order.add(i);
+			} 
 			order.sort((i1, i2) -> (int) (10000 * (circles[i2].getAbsolute() - circles[i1].getAbsolute())));
 			Integer[] shaft = new Integer[freq.length];
 			order.toArray(shaft);
