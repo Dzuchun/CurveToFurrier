@@ -6,5 +6,6 @@ How to use:
 
 Use this code whereever and however you want, but respect other possible autors.
 
-![ctf1](https://user-images.githubusercontent.com/46713596/144419066-c57501f1-e4d8-4dfa-8a95-adcdd5231e49.png)
-![ctf2](https://user-images.githubusercontent.com/46713596/144419076-5662a099-4f36-4c6b-a7a7-232fcf602508.png)
+![image](https://user-images.githubusercontent.com/46713596/145695382-8d6a51e3-b023-4ff3-95bb-3b44a8d8f6ac.png)
+![image](https://user-images.githubusercontent.com/46713596/145695394-7c244eba-2cd6-417f-ad0f-c4d42c7fd624.png)
+![image](https://user-images.githubusercontent.com/46713596/145695417-ac3d12ac-cfc1-40a2-b9de-aeef1107fa39.png)
